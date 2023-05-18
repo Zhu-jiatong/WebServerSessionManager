@@ -7,10 +7,13 @@
 struct ClientSession : public Session<uint8_t*>
 {
 public:
-	ClientSession(uint32_t m_clientIP, const char* userId, std::shared_ptr<uint8_t[32]> sessionId = nullptr) :
-		Session(userId, m_clientIP), m_sessionId(sessionId) {}
+	ClientSession(uint32_t m_clientIP, const char* userId);
 
 	std::shared_ptr<uint8_t[32]> m_sessionId;
+
+private:
+	void generateId();
+	static std::chrono::time_point<std::chrono::high_resolution_clock> m_firstInstantiationTime;
 };
 
 template<typename ClientSessionType = ClientSession>
@@ -30,10 +33,6 @@ public:
 
 	static std::string sessionIdToString(key_type sessionId);
 	static std::shared_ptr<uint8_t[32]> sessionIdToArray(std::string sessionIdString);
-
-private:
-	std::shared_ptr<uint8_t[32]> generateId(uint32_t clientIpAddress);
-	std::chrono::time_point<std::chrono::high_resolution_clock> initialTimestamp;
 };
 
 #include "ClientSessionManagerImpl.h"

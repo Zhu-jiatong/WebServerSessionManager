@@ -1,14 +1,38 @@
 #pragma once
-#include "ClientSessionManagerImpl.h"
+
 #include <sstream>
 #include <cstring>
 #include <string>
 #include <mbedtls/sha256.h>
 #include <iostream>
 #include <iomanip>
+#include "ClientSessionManager.h"
+
+std::chrono::time_point<std::chrono::high_resolution_clock> ClientSession::m_firstInstantiationTime = std::chrono::high_resolution_clock::now();
+
+ClientSession::ClientSession(uint32_t m_clientIP, const char* userId) :
+	Session(userId, m_clientIP)
+{
+	generateId();
+}
+
+void ClientSession::generateId()
+{
+	std::shared_ptr<uint8_t[32]> sessionId(new uint8_t[32], std::default_delete<uint8_t[]>());
+	auto period = std::chrono::duration_cast<std::chrono::nanoseconds>(m_instantiationTimestamp - m_firstInstantiationTime).count();
+
+	std::ostringstream ss;
+	ss << period << m_clientIP;
+	const std::string& inputStr = ss.str();
+	const char* inputCstr = inputStr.c_str();
+
+	mbedtls_sha256_ret(reinterpret_cast<const uint8_t*>(inputCstr), strlen(inputCstr), sessionId.get(), 0);
+
+	m_sessionId = sessionId;
+}
 
 template<typename ClientSessionType>
-inline void ClientSessionManager<ClientSessionType>::begin()
+void ClientSessionManager<ClientSessionType>::begin()
 {
 }
 
@@ -20,8 +44,6 @@ void ClientSessionManager<ClientSessionType>::updateSessions()
 template<typename ClientSessionType>
 void ClientSessionManager<ClientSessionType>::createSession(session_type sessionData)
 {
-	std::shared_ptr<uint8_t[32]> sessionId = generateId(sessionData.m_clientIP);
-	sessionData.m_sessionId = sessionId;
 	SessionManagerBase<ClientSessionType>::m_fn_storeSession(sessionData);
 }
 
@@ -55,22 +77,5 @@ std::shared_ptr<uint8_t[32]> ClientSessionManager<ClientSessionType>::sessionIdT
 		std::string byteString = sessionIdString.substr(i, 2);
 		output[i / 2] = std::stoi(byteString, nullptr, 16);
 	}
-	return output;
-}
-
-template<typename ClientSessionType>
-std::shared_ptr<uint8_t[32]> ClientSessionManager<ClientSessionType>::generateId(uint32_t clientIpAddress)
-{
-	std::shared_ptr<uint8_t[32]> output(new uint8_t[32], std::default_delete<uint8_t[]>()); // TODO: remove `std::default_delete<uint8_t[]>()` after v3.0.0 (5.1)
-
-	auto timestamp = std::chrono::high_resolution_clock::now();
-	auto period = std::chrono::duration_cast<std::chrono::nanoseconds>(timestamp - initialTimestamp).count();
-
-	std::ostringstream ss;
-	ss << period << clientIpAddress;
-	const std::string& inputStr = ss.str();
-	const char* inputCstr = inputStr.c_str();
-
-	mbedtls_sha256_ret(reinterpret_cast<const uint8_t*>(inputCstr), strlen(inputCstr), output.get(), 0);
 	return output;
 }

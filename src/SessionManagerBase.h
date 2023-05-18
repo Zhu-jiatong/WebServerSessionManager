@@ -12,12 +12,11 @@ public:
 	Session(const char* userId, uint32_t clientIP) :
 		m_userId(userId),
 		m_clientIP(clientIP),
-		m_lastActiveTimestamp(std::chrono::high_resolution_clock::now()) {};
+		m_instantiationTimestamp(std::chrono::high_resolution_clock::now()) {};
 
 	const char* m_userId;
 	uint32_t m_clientIP;
-	std::chrono::time_point<std::chrono::high_resolution_clock> m_lastActiveTimestamp;
-
+	std::chrono::time_point<std::chrono::high_resolution_clock> m_instantiationTimestamp;
 };
 
 template<typename SessionType, typename KeyType = typename SessionType::key_type>
