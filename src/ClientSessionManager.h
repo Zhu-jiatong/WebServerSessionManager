@@ -4,16 +4,13 @@
 #include <memory>
 #include <type_traits>
 
-struct ClientSession : public Session<uint8_t*>
+struct ClientSession : public SessionBase<std::shared_ptr<uint8_t[32]>>
 {
 public:
-	ClientSession(uint32_t m_clientIP, const char* userId);
-
-	std::shared_ptr<uint8_t[32]> m_sessionId;
+	ClientSession(const char* userId, uint32_t clientIp);
 
 private:
-	void generateId();
-	static std::chrono::time_point<std::chrono::high_resolution_clock> m_firstInstantiationTime;
+	key_type generateId();
 };
 
 template<typename ClientSessionType = ClientSession>

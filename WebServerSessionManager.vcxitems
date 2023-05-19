@@ -22,9 +22,11 @@
     <!-- <ClInclude Include="$(MSBuildThisFileDirectory)WebServerSessionManager.h" /> -->
     <ClInclude Include="$(MSBuildThisFileDirectory)src\ClientSessionManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)src\ClientSessionManagerImpl.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\ServerSessionManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)src\SessionManagerBase.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\ServerSessionManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)src\WebServerSessionManager.cpp" />
   </ItemGroup>
 </Project>

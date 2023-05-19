@@ -31,9 +31,9 @@ void setup()
 
 	sessionManager.begin();
 
-	SessionType session1(12345, "Test User 1");
-	SessionType session2(67890, "Test User 2");
-	SessionType session3(13579, "Test User 3");
+	SessionType session1("Test User 1", 123456);
+	SessionType session2("Test User 2", 67890);
+	SessionType session3("Test User 3", 13579);
 
 	sessionManager.createSession(session1);
 	sessionManager.createSession(session2);
@@ -57,14 +57,13 @@ void serialEvent()
 
 	auto querry = SessionManager::sessionIdToArray(hashString);
 
-	std::string sessionId = SessionManager::sessionIdToString(querry.get());
-	SessionType session = sessionManager.getSessionInformation(querry.get());
+	SessionType session = sessionManager.getSessionInformation(querry);
 	std::cout << session.m_userId << '\n';
 }
 
 void storeSession(SessionType sessionData)
 {
-	std::string sessionId = SessionManager::sessionIdToString(sessionData.m_sessionId.get());
+	std::string sessionId = SessionManager::sessionIdToString(sessionData.m_sessionId);
 	std::cout << "Stored Session: \"" << sessionData.m_userId << "\" with ID: \"" << sessionId << "\"\n";
 	sessions.emplace(sessionId, sessionData);
 }

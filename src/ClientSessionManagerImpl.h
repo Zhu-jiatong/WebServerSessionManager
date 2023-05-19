@@ -8,19 +8,20 @@
 #include <iomanip>
 #include "ClientSessionManager.h"
 
-std::chrono::time_point<std::chrono::high_resolution_clock> ClientSession::m_firstInstantiationTime = std::chrono::high_resolution_clock::now();
+template<typename KeyType>
+std::chrono::time_point<std::chrono::high_resolution_clock> SessionBase<KeyType>::m_firstInstantiationTime = std::chrono::high_resolution_clock::now();
 
-ClientSession::ClientSession(uint32_t m_clientIP, const char* userId) :
-	Session(userId, m_clientIP)
+ClientSession::ClientSession(const char* userId, uint32_t clientIp) :
+	SessionBase(userId, clientIp)
 {
-	generateId();
+	m_sessionId = generateId();
 }
 
-void ClientSession::generateId()
+ClientSession::key_type ClientSession::generateId()
 {
 	std::shared_ptr<uint8_t[32]> sessionId(new uint8_t[32], std::default_delete<uint8_t[]>());
-	auto period = std::chrono::duration_cast<std::chrono::nanoseconds>(m_instantiationTimestamp - m_firstInstantiationTime).count();
-
+	auto period = std::chrono::duration_cast<std::chrono::microseconds>(m_instantiationTimestamp - m_firstInstantiationTime).count();
+	std::cout << period << '\n';
 	std::ostringstream ss;
 	ss << period << m_clientIP;
 	const std::string& inputStr = ss.str();
@@ -28,7 +29,7 @@ void ClientSession::generateId()
 
 	mbedtls_sha256_ret(reinterpret_cast<const uint8_t*>(inputCstr), strlen(inputCstr), sessionId.get(), 0);
 
-	m_sessionId = sessionId;
+	return sessionId;
 }
 
 template<typename ClientSessionType>
