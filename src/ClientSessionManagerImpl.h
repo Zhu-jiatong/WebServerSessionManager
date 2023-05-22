@@ -11,10 +11,16 @@
 template<typename KeyType>
 std::chrono::time_point<std::chrono::high_resolution_clock> SessionBase<KeyType>::m_firstInstantiationTime = std::chrono::high_resolution_clock::now();
 
-ClientSession::ClientSession(const char* userId, uint32_t clientIp) :
+ClientSession::ClientSession(const std::string& userId, uint32_t clientIp) :
 	SessionBase(userId, clientIp)
 {
 	m_sessionId = generateId();
+}
+
+ClientSession::ClientSession(const std::string& userId, uint32_t clientIp, key_type sessionId) :
+	SessionBase(userId, clientIp)
+{
+	m_sessionId = sessionId;
 }
 
 ClientSession::key_type ClientSession::generateId()
@@ -70,7 +76,7 @@ std::string ClientSessionManager<ClientSessionType>::sessionIdToString(key_type 
 }
 
 template<typename ClientSessionType>
-std::shared_ptr<uint8_t[32]> ClientSessionManager<ClientSessionType>::sessionIdToArray(std::string sessionIdString)
+typename ClientSessionManager<ClientSessionType>::key_type ClientSessionManager<ClientSessionType>::sessionIdToArray(std::string sessionIdString)
 {
 	std::shared_ptr<uint8_t[32]> output(new uint8_t[32], std::default_delete<uint8_t[]>());
 	for (size_t i = 0; i < sessionIdString.length(); i += 2)

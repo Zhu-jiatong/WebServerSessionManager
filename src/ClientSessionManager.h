@@ -7,7 +7,8 @@
 struct ClientSession : public SessionBase<std::shared_ptr<uint8_t[32]>>
 {
 public:
-	ClientSession(const char* userId, uint32_t clientIp);
+	ClientSession(const std::string& userId, uint32_t clientIp);
+	ClientSession(const std::string& userId, uint32_t clientIp, key_type sessionId);
 
 private:
 	key_type generateId();
@@ -29,7 +30,7 @@ public:
 	ClientSessionType getSessionInformation(key_type sessionId); // TODO: use `std::optional`
 
 	static std::string sessionIdToString(key_type sessionId);
-	static std::shared_ptr<uint8_t[32]> sessionIdToArray(std::string sessionIdString);
+	static key_type sessionIdToArray(std::string sessionIdString);
 };
 
 #include "ClientSessionManagerImpl.h"
