@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SERVER_SESSION_MANAGER_h
+#define SERVER_SESSION_MANAGER_h
 
 #include "SessionManagerBase.h"
 #include <lwip/etharp.h>
@@ -13,3 +14,5 @@ private:
 
 	eth_addr m_mac;
 };
+
+#endif // !SERVER_SESSION_MANAGER_h

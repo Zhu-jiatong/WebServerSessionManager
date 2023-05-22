@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CLIENT_SESSION_MANAGER_IMPL_h
+#define CLIENT_SESSION_MANAGER_IMPL_h
 
 #include <sstream>
 #include <cstring>
@@ -86,3 +87,5 @@ typename ClientSessionManager<ClientSessionType>::key_type ClientSessionManager<
 	}
 	return output;
 }
+
+#endif // !CLIENT_SESSION_MANAGER_IMPL_h

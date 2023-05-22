@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SESSION_MANAGER_BASE_h
+#define SESSION_MANAGER_BASE_h
 
 #include <chrono>
 #include <functional>
@@ -51,3 +52,5 @@ protected:
 	std::function<void(key_type)> m_fn_deleteSession;
 	std::function<session_type(key_type)> m_fn_retrieveSession;
 };
+
+#endif // !SESSION_MANAGER_BASE_h

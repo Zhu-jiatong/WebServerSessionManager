@@ -1,4 +1,6 @@
-#pragma once
+#ifndef CLIENT_SESSION_MANAGER_h
+#define CLIENT_SESSION_MANAGER_h
+
 #include "SessionManagerBase.h"
 #include <functional>
 #include <memory>
@@ -34,3 +36,5 @@ public:
 };
 
 #include "ClientSessionManagerImpl.h"
+
+#endif // !CLIENT_SESSION_MANAGER_h
