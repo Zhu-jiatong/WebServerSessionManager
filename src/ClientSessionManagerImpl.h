@@ -5,7 +5,6 @@
 #include <cstring>
 #include <string>
 #include <mbedtls/sha256.h>
-#include <iostream>
 #include <iomanip>
 #include "ClientSessionManager.h"
 
@@ -28,7 +27,7 @@ ClientSession::key_type ClientSession::generateId()
 {
 	std::shared_ptr<uint8_t[32]> sessionId(new uint8_t[32], std::default_delete<uint8_t[]>());
 	auto period = std::chrono::duration_cast<std::chrono::microseconds>(m_instantiationTimestamp - m_firstInstantiationTime).count();
-	std::cout << period << '\n';
+
 	std::ostringstream ss;
 	ss << period << m_clientIP;
 	const std::string& inputStr = ss.str();
