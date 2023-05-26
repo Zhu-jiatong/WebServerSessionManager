@@ -14,9 +14,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)src\WebServerSessionManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)src\ServerSessionManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="$(MSBuildThisFileDirectory)readme.txt" />
@@ -34,9 +31,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)src\ClientSessionManagerImpl.h">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)src\ServerSessionManager.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

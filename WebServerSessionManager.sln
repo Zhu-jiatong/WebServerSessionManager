@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WebServerSessionManager", "
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Interfacing_with_Cpp_Standard_Containers", "examples\Interfacing_with_Cpp_Standard_Containers\Interfacing_with_Cpp_Standard_Containers.vcxproj", "{6C062249-6F94-4994-BB4C-2435A85C8DEE}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Interfacing_with_SQLite", "examples\Interfacing_with_SQLite\Interfacing_with_SQLite.vcxproj", "{3E577525-F98E-48CF-B67B-FACE378C59A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
@@ -43,6 +45,30 @@ Global
 		{6C062249-6F94-4994-BB4C-2435A85C8DEE}.Release|x86.ActiveCfg = Release|x86
 		{6C062249-6F94-4994-BB4C-2435A85C8DEE}.Release|x86.Build.0 = Release|x86
 		{6C062249-6F94-4994-BB4C-2435A85C8DEE}.Release|x86.Deploy.0 = Release|x86
+		{3E577525-F98E-48CF-B67B-FACE378C59A4}.Debug|ARM.ActiveCfg = Debug|ARM
+		{3E577525-F98E-48CF-B67B-FACE378C59A4}.Debug|ARM.Build.0 = Debug|ARM
+		{3E577525-F98E-48CF-B67B-FACE378C59A4}.Debug|ARM.Deploy.0 = Debug|ARM
+		{3E577525-F98E-48CF-B67B-FACE378C59A4}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{3E577525-F98E-48CF-B67B-FACE378C59A4}.Debug|ARM64.Build.0 = Debug|ARM64
+		{3E577525-F98E-48CF-B67B-FACE378C59A4}.Debug|ARM64.Deploy.0 = Debug|ARM64
+		{3E577525-F98E-48CF-B67B-FACE378C59A4}.Debug|x64.ActiveCfg = Debug|x64
+		{3E577525-F98E-48CF-B67B-FACE378C59A4}.Debug|x64.Build.0 = Debug|x64
+		{3E577525-F98E-48CF-B67B-FACE378C59A4}.Debug|x64.Deploy.0 = Debug|x64
+		{3E577525-F98E-48CF-B67B-FACE378C59A4}.Debug|x86.ActiveCfg = Debug|x86
+		{3E577525-F98E-48CF-B67B-FACE378C59A4}.Debug|x86.Build.0 = Debug|x86
+		{3E577525-F98E-48CF-B67B-FACE378C59A4}.Debug|x86.Deploy.0 = Debug|x86
+		{3E577525-F98E-48CF-B67B-FACE378C59A4}.Release|ARM.ActiveCfg = Release|ARM
+		{3E577525-F98E-48CF-B67B-FACE378C59A4}.Release|ARM.Build.0 = Release|ARM
+		{3E577525-F98E-48CF-B67B-FACE378C59A4}.Release|ARM.Deploy.0 = Release|ARM
+		{3E577525-F98E-48CF-B67B-FACE378C59A4}.Release|ARM64.ActiveCfg = Release|ARM64
+		{3E577525-F98E-48CF-B67B-FACE378C59A4}.Release|ARM64.Build.0 = Release|ARM64
+		{3E577525-F98E-48CF-B67B-FACE378C59A4}.Release|ARM64.Deploy.0 = Release|ARM64
+		{3E577525-F98E-48CF-B67B-FACE378C59A4}.Release|x64.ActiveCfg = Release|x64
+		{3E577525-F98E-48CF-B67B-FACE378C59A4}.Release|x64.Build.0 = Release|x64
+		{3E577525-F98E-48CF-B67B-FACE378C59A4}.Release|x64.Deploy.0 = Release|x64
+		{3E577525-F98E-48CF-B67B-FACE378C59A4}.Release|x86.ActiveCfg = Release|x86
+		{3E577525-F98E-48CF-B67B-FACE378C59A4}.Release|x86.Build.0 = Release|x86
+		{3E577525-F98E-48CF-B67B-FACE378C59A4}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +78,7 @@ Global
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		WebServerSessionManager.vcxitems*{1eb40eb8-6b09-40f6-8c0f-a0e9383a9ab0}*SharedItemsImports = 9
+		WebServerSessionManager.vcxitems*{3e577525-f98e-48cf-b67b-face378c59a4}*SharedItemsImports = 4
 		WebServerSessionManager.vcxitems*{6c062249-6f94-4994-bb4c-2435a85c8dee}*SharedItemsImports = 4
 	EndGlobalSection
 EndGlobal

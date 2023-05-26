@@ -33,21 +33,24 @@ public:
 	using key_type = KeyType;
 
 	SessionManagerBase(
+		std::function<void()> fn_initialisation,
 		std::function<void(session_type)> fn_storeSession,
 		std::function<void(key_type)> fn_deleteSession,
 		std::function<session_type(key_type)> fn_retrieveSession
 	) :
+		m_fn_initialisation(fn_initialisation),
 		m_fn_storeSession(fn_storeSession),
 		m_fn_deleteSession(fn_deleteSession),
 		m_fn_retrieveSession(fn_retrieveSession) {}
 
-	virtual void begin() = 0;
+	virtual void begin() { m_fn_initialisation(); };
 	virtual void createSession(session_type) = 0;
 	virtual void terminateSession(key_type) = 0;
 	virtual void updateSessions() = 0;
 	virtual session_type getSessionInformation(key_type) = 0;
 
 protected:
+	std::function<void()>m_fn_initialisation;
 	std::function<void(session_type)> m_fn_storeSession;
 	std::function<void(key_type)> m_fn_deleteSession;
 	std::function<session_type(key_type)> m_fn_retrieveSession;

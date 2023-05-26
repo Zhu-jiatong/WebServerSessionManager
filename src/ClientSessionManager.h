@@ -25,7 +25,6 @@ public:
 	using session_type = typename SessionManagerBase<ClientSessionType>::session_type;
 	using key_type = typename SessionManagerBase<ClientSessionType>::key_type;
 
-	void begin();
 	void updateSessions();
 	void createSession(session_type sessionData);
 	void terminateSession(key_type sessionId);

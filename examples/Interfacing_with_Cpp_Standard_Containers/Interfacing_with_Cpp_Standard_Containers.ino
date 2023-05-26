@@ -17,11 +17,12 @@ using KeyType = SessionType::key_type;
 
 std::unordered_map<std::string, SessionType> sessions;
 
+void initialiseSessionManager() {};
 void storeSession(SessionType sessionData);
 void deleteSession(KeyType sessionId);
 SessionType retrieveSession(KeyType sessionId);
 
-SessionManager sessionManager(storeSession, deleteSession, retrieveSession);
+SessionManager sessionManager(initialiseSessionManager, storeSession, deleteSession, retrieveSession);
 
 // the setup function runs once when you press reset or power the board
 void setup()

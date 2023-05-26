@@ -39,11 +39,6 @@ ClientSession::key_type ClientSession::generateId()
 }
 
 template<typename ClientSessionType>
-void ClientSessionManager<ClientSessionType>::begin()
-{
-}
-
-template<typename ClientSessionType>
 void ClientSessionManager<ClientSessionType>::updateSessions()
 {
 }
