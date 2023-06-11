@@ -4,16 +4,38 @@
 #include "SessionManagerBase.h"
 #include <functional>
 #include <memory>
-#include <type_traits>
+#include <mbedtls/sha256.h>
+#include <sstream>
 
-struct ClientSession : public SessionBase<std::shared_ptr<uint8_t[32]>>
+struct ClientSession : public SessionBase<std::shared_ptr<uint8_t[]>>
 {
 public:
-	ClientSession(const std::string& userId, uint32_t clientIp);
-	ClientSession(const std::string& userId, uint32_t clientIp, key_type sessionId);
+	ClientSession(const std::string& userId, uint32_t clientIp) :
+		SessionBase(userId, clientIp)
+	{
+		m_sessionId = generateId();
+	}
+	ClientSession(const std::string& userId, uint32_t clientIp, key_type sessionId) :
+		SessionBase(userId, clientIp)
+	{
+		m_sessionId = sessionId;
+	}
 
 private:
-	key_type generateId();
+	key_type generateId()
+	{
+		std::shared_ptr<uint8_t[]> sessionId(new uint8_t[32]);
+		auto period = std::chrono::duration_cast<std::chrono::microseconds>(m_instantiationTimestamp - m_firstInstantiationTime).count();
+
+		std::ostringstream ss;
+		ss << period << m_clientIP;
+		const std::string& inputStr = ss.str();
+		const char* inputCstr = inputStr.c_str();
+
+		mbedtls_sha256_ret(reinterpret_cast<const uint8_t*>(inputCstr), strlen(inputCstr), sessionId.get(), 0);
+
+		return sessionId;
+	}
 };
 
 template<typename ClientSessionType = ClientSession>
